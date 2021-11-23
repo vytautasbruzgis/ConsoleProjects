@@ -15,6 +15,18 @@ namespace SampleConsoleProjects
 
             var randomnumber = "5";
             PrintInfo(randomnumber);
+
+            /* bandymas padidinti array */
+            var arrayOfInts = new[] { 1, 2, 3, 4, 5, 6 };
+            arrayOfInts.Append(8);
+            try { 
+                   PrintInfo(arrayOfInts[6].ToString());  
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine("Klaida: " + e.Message);
+            }
+            
         }
 
         public static void PrintInfo(string info)
