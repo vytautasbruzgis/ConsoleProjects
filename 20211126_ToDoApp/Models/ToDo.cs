@@ -6,25 +6,27 @@ using System.Threading.Tasks;
 
 namespace _20211126_ToDoApp.Models
 {
-    class ToDo
+    class Book
     {
         public int Id { get; set; } 
-        public string Name { get; set; }
+        public string Title { get; set; }
         public string? Description { get; set; }
-        public bool IsCompleted { get; set; } = false;
+        public int Amount { get; set; }
+        
 
-        public ToDo(int id, string name = "undefined", string description = "undefined")
+        public Book(int id, int amount, string name = "undefined", string description = "undefined")
             
         {
             Id = id;
-            Name = name;
+            Title = name;
             Description = description;
+            Amount = 0;
         }
 
 
         public string toListString()
         {
-            return "Id: " + Id + ", Name: " + Name + ", Description: " + Description;
+            return "Id: " + Id + ", Name: " + Title + ", Description: " + Description;
         }
 
     }

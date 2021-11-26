@@ -4,13 +4,13 @@ using System.Linq;
 
 Console.WriteLine("Welcome to your toDoList app!");
 
-List<ToDo> toDoList = new List<ToDo>();
+List<Book> bookList = new List<Book>();
 //toDoList = getToDoList();
 
 while (true)
 {
     /* sukam programą */
-    Console.WriteLine("Choose your command: 'Add', 'List'");
+    Console.WriteLine("Choose your command: 'Add', 'List', 'Delete +name'");
     var command = Console.ReadLine().Split(" ");
   
     if (command[0] == "Add")
@@ -19,20 +19,27 @@ while (true)
         Console.WriteLine("--------------------");
         Console.Write("Enter name:");
         var name = Console.ReadLine();
+        if (bookList.Where(x => x.Title == name).Count() > 0) {
+            Console.WriteLine("Such a book is already in the store");
+            goto EndAdd;
+        }
         Console.Write("Enter description:");
         var description = Console.ReadLine();
+        Console.Write("Enter amount:");
+        var amount = Convert.ToInt32(Console.ReadLine());
+        bookList.Add(new Book(bookList.Count + 1, amount > 0 ? amount : 0, name, description));
 
-        toDoList.Add(new ToDo(toDoList.Count + 1, name, description));
-
+    EndAdd:
+        ;
+        
     }
     else if (command[0] == "List")
     {
-        ListCommand:
         Console.WriteLine("Processing command 'List'");
-        if (toDoList.Count > 0)
+        if (bookList.Count > 0)
         {
 
-            toDoList.ForEach(toDo =>
+            bookList.ForEach(toDo =>
             {
                 Console.WriteLine(toDo.toListString());
             });
@@ -48,15 +55,12 @@ while (true)
 
        
 
-        if (toDoList.Count > 0)
+        if (bookList.Count > 0)
         {
             try
             {
                 Console.WriteLine("Delete args: " + command[1]);
-                //var filteredList = toDoList.Where(x => x.Id == Convert.ToInt32(command[1])).First();
-                //Console.WriteLine();
-                toDoList.RemoveAt(toDoList.IndexOf(toDoList.Where(x => x.Id == Convert.ToInt32(command[1])).First()));
-                //goto ListCommand;
+                bookList.RemoveAt(bookList.IndexOf(bookList.Where(x => x.Title == command[1]).First()));
             }
             catch
             {
@@ -67,35 +71,9 @@ while (true)
             Console.WriteLine("Nothing to delete, your list is empty.");
         }
 
-        //bool isOk = false;
-        //do
-        //{
-        //    Console.Write("Enter item Id:");
-        //    int itemId = Convert.ToInt32(Console.ReadLine);
-
-        //    Console.WriteLine(toDoList.Where(x => x.Id == itemId).Count);
-
-        //    //if (toDoList.Where( x =>  x.Id == itemId).Count == 1) { 
-
-        //    //}
-
-        //    isOk = true;
-        //} while (!isOk);
-
     } else if (command[0] == "Update"){
         Console.WriteLine("Processing command 'Update'");
         Console.WriteLine("--------------------");
-        //bool isOk = false;
-        //do
-        //{
-        //    Console.Write("Enter item Id:");
-        //    int itemId = Convert.ToInt32(Console.ReadLine);
-
-        //    //if (toDoList.Select().Where) ;
-
-        //    isOk = true;
-        //} while (!isOk);
-
     } else {
         Console.WriteLine("Bye bye!");
         Environment.Exit(0);
