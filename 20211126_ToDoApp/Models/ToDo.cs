@@ -26,7 +26,14 @@ namespace _20211126_ToDoApp.Models
 
         public string toListString()
         {
-            return "Id: " + Id + ", Name: " + Title + ", Description: " + Description;
+            return "Id: " + Id + ", Name: " + Title + ", Description: " + Description + ", Amount: " + Amount;
+        }
+
+        public void updateBook(string title, string description, int amount)
+        {
+            Title = title == "undefined" ? "undefined" : description;
+            Description = description == "undefined" ? "undefined" : description;
+            Amount = amount;
         }
 
     }
